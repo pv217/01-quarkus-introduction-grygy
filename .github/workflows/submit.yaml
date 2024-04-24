@@ -9,8 +9,12 @@ jobs:
     runs-on: maven:latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Test
-        run: cd ./flight-service && mvn clean install
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Run the Maven verify phase
+        run: cd flight-service && mvn clean install
 
